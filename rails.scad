@@ -6,7 +6,7 @@ use <murmelburg_modules.scad>;
 // angle: bend angle in degrees (0 = straight, 90 = quarter turn, 180 = half turn)
 // fn: facet count for the rail
 module rail(units = 1, step = 1 , angle= 0, fn = 20) {
-    asstert (units > 0, "units must be greater than 0");
+    assert (units > 0, "units must be greater than 0");
     assert (floor(units) == units, "units must be an integer");
     length = angle == 90 ? units * 50 -25 : units * 50;
     if (angle == 0) {

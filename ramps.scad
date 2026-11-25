@@ -11,7 +11,7 @@ For greater values of bank you might need to use https://www.formware.co/onlines
 // step: step size for the ramp
 // fn: facet count for the ramp
 module ramp(units = 1, drop = 1, step = 1, fn=20) {
-    asstert (units > 0, "units must be greater than 0");
+    assert (units > 0, "units must be greater than 0");
     assert (floor(units) == units, "units must be an integer");
     assert (drop > 0, "drop must be greater than 0");
     assert (floor(drop) == drop, "drop must be an integer");
@@ -38,7 +38,7 @@ module ramp90(units = 1, drop = 1, step = 1, reverse = false, fn = 20, bank = 0)
     // Querneigung konstant. Sie blendet an beiden Enden auf 0 aus und
     // zusaetzlich erst ein, wenn unter der Lippe genug Bauhoehe ist
     // (z > ~8mm), damit die gekippte Lippe nicht unter z = 0 sticht.
-    asstert (units > 0, "units must be greater than 0");
+    assert (units > 0, "units must be greater than 0");
     assert (floor(units) == units, "units must be an integer");
     assert (drop > 0, "drop must be greater than 0");
     assert (floor(drop) == drop, "drop must be an integer");

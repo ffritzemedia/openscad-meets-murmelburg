@@ -1,6 +1,6 @@
 # OpenSCAD meets Murmelburg
 
-Parametrische, 3D-druckbare Murmelbahnelemente für [OpenSCAD](https://openscad.org) — auf einem 50-mm-Raster mit standardisierten Anschlussstücken, damit alle Teile untereinander kompatibel bleiben.
+Parametrische, 3D-druckbare **Zusatzteile für das [Murmelburg](https://cults3d.com/de/drucklisten/FFritze/murmelburg-marble-castle)-System** — auf einem 50-mm-Raster mit standardisierten Anschlussstücken, damit alle Teile untereinander kompatibel bleiben. Mehr zum System gibt es im [Printlab-Bereich von ffritze.de](https://ffritze.de/category/printlab/murmelburg/).
 
 - 📝 [Beitrag auf ffritze.de](https://ffritze.de/openscad-meets-murmelburg-neue-streckenteile-zum-selberrendern/)
 - 🖨️ [Gerenderte Dateien zum Download (Cults3D)](https://cults3d.com/de/modell-3d/spiel/murmelburg-rails-n-ramps-set)

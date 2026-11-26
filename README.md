@@ -3,7 +3,7 @@
 Parametrische, 3D-druckbare Murmelbahnelemente für [OpenSCAD](https://openscad.org) — auf einem 50-mm-Raster mit standardisierten Anschlussstücken, damit alle Teile untereinander kompatibel bleiben.
 
 - 📝 [Beitrag auf ffritze.de](https://ffritze.de/openscad-meets-murmelburg-neue-streckenteile-zum-selberrendern/)
-- 🖨️ [Gegossene Dateien zum Download (Cults3D)](https://cults3d.com/de/modell-3d/spiel/murmelburg-rails-n-ramps-set)
+- 🖨️ [Gerenderte Dateien zum Download (Cults3D)](https://cults3d.com/de/modell-3d/spiel/murmelburg-rails-n-ramps-set)
 
 ## Dateien
 

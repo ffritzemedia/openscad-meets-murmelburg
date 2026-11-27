@@ -10,7 +10,7 @@ Parametrische, 3D-druckbare **Zusatzteile für das [Murmelburg](https://cults3d.
 | Datei | Inhalt |
 |---|---|
 | `murmelburg_modules.scad` | Grundbibliothek: Halbrohr-Profile, Querschnitts-Scheiben, `tilted_ramp()` mit Höhen-/Seitenkurven und Banking |
-| `ramps.scad` | Rampen-Module: `ramp()` (gerade), `ramp90()` (Viertelbogen), `ramp180()` (Halbdrehung) |
+| `ramps.scad` | Rampen-Module: `ramp()` (gerade), `ramp90()` (Viertelbogen), `ramp180()` (Halbdrehung), `ramp360()` (Vollkreis/Spirale) |
 | `rails.scad` | Schienen-Module: `rail()` — gerade und gebogene Bahnen **ohne** Höhenunterschied |
 
 ## Voraussetzungen
@@ -23,13 +23,16 @@ Parametrische, 3D-druckbare **Zusatzteile für das [Murmelburg](https://cults3d.
 ```scad
 use <murmelburg_modules.scad>;
 use <rails.scad>;
+use <ramps.scad>;
 
 // Schiene mit 90°-Bogen, 2 Einheiten (je 50 mm)
 rail(units = 2, angle = 90);
 
 // Rampe mit 180°-Wende und Banking
-// use <ramps.scad>;
 // ramp180(units = 2, drop = 1, bank = 15);
+
+// 360°-Spirale aus zwei Halbkreisen
+ramp360(units = 1, drop = 1);
 ```
 
 ### Parameter (Auswahl)

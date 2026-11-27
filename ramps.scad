@@ -113,11 +113,19 @@ module ramp180(units = 1, drop = 1, step = 1, reverse = false, fn=20, bank = 0) 
     }
 }
 
+// Maps chord position along a semicircle to polynomial progress [0, 0.5].
+function ramp360_progress(x, length) = acos(1 - 2*x/length) / 360;
+// Chain-rule derivative of ramp360_progress; clamp the singular endpoints.
+function ramp360_progress_slope(x, length) = let(u = min(1 - 1e-6, max(1e-6, x / length))) 1 / (2 * PI * length * sqrt(u * (1 - u)));
+// Derivative of the semicircle's lateral offset, with the same endpoint clamp.
+function ramp360_side_slope(x, length) = let(u = min(1 - 1e-6, max(1e-6, x / length))) spinnslope(2*u - 1);
+
+// 360-degree spiral ramp assembled from two semicircular halves.
+// units: number of 50mm segments
+// drop: number of 50mm height steps
+// step: segment length for the ramp
+// fn: facet count for the ramp
 module ramp360(units = 1, drop = 1, step = 1, reverse = false, fn=20) {
-    // bank: maximaler Bankwinkel in Grad (0 = keine Querneigung)   
-    // Positives bank neigt nach aussen (Bande auf der Aussenseite erhoeht).
-    // Das Banking folgt der Plan-Gedaechtnis des Bogens (Krummung ~ 1/sqrt(1-t^2))
-    // und blendet an beiden Enden auf 0 aus, damit die Anschlussstuecke passen.
     assert (units > 0, "units must be greater than 0");
     assert (floor(units) == units, "units must be an integer");
     assert (drop > 0, "drop must be greater than 0");
@@ -134,13 +142,13 @@ module ramp360(units = 1, drop = 1, step = 1, reverse = false, fn=20) {
     }
     module first_half(){
         union(){
-            tilted_ramp(function(x) height * polynomial(x / (2*length)), function(x) slope(x / (2*length)), function(x) length / 2 * spinn((x / (length /2))-1), function(x) spinnslope((x / (length/2))-1), x_start = 0, x_end = length, step = step, fn = fn, fb = function(x) 0);
+            tilted_ramp(function(x) height * polynomial(ramp360_progress(x, length)), function(x) height * slope(ramp360_progress(x, length)) * ramp360_progress_slope(x, length), function(x) length / 2 * spinn((x / (length /2))-1), function(x) ramp360_side_slope(x, length), x_start = 0, x_end = length, step = step, fn = fn, fb = function(x) 0);
             tuberail();
         }
     }
     module second_half(){
         union(){
-            tilted_ramp(function(x) height * polynomial(x / (2*length)), function(x) slope(x / (2*length)), function(x) length / 2 * spinn(((x - length) / (length /2))-1), function(x) spinnslope(((x-length) / (length/2))-1), x_start = length, x_end = 2*length, step = step, fn = fn, fb = function(x) 0);
+            tilted_ramp(function(x) height * polynomial(0.5 + ramp360_progress(x - length, length)), function(x) height * slope(0.5 + ramp360_progress(x - length, length)) * ramp360_progress_slope(x - length, length), function(x) length / 2 * spinn(((x - length) / (length /2))-1), function(x) ramp360_side_slope(x - length, length), x_start = length, x_end = 2*length, step = step, fn = fn, fb = function(x) 0);
             translate([2*length, 0, height]) tuberail();
         }
     }

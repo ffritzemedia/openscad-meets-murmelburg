@@ -112,16 +112,17 @@ module halftubetube_end(r= 10, w_1 = 2.8, w_2= 1.8, l_1 = 1.5, l2 = 2.4  ,fn = 2
 //   z = Höhe der Bahn an dieser Stelle [mm]
 //   m = Steigung dz/dx an dieser Stelle (dimensionslos)
 //   y = Position entlang Y [mm], Default: 0
+//   d = Steigung dy/dx an dieser Stelle (dimensionslos), Default: 0
 //   bank = Bankwinkel um die Bahnachse in Grad, Default: 0
 // Description:
-//   Verschiebt die Kinder nach [x, y, z] und kippt sie um atan(m) um die
-//   Y-Achse. Die lokale X-Achse zeigt danach in Bahnrichtung, alles darin
-//   steht senkrecht zur Bahn. Ein positiver bank-Wert hebt die +Y-Seite
+//   Verschiebt die Kinder nach [x, y, z] und richtet die lokale X-Achse an
+//   der Tangente (1, d, m) aus. Ein positiver bank-Wert hebt die +Y-Seite
 //   der Bahn an (Neigung in die Kurve).
 // Example:
 //   on_slope(25, 50 * polynomial(0.5), slope(25)) halftube_slice();
 module on_slope(x, z, m, y = 0, d=0, bank = 0) {
-    translate([x, y, z]) rotate([bank, -atan(m), atan(d)]) children();
+    pitch = atan(m / sqrt(1 + d*d));
+    translate([x, y, z]) rotate([bank, -pitch, atan(d)]) children();
 }
 
 // Module: halftube_slice()

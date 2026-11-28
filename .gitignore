@@ -1,0 +1,19 @@
+# Betriebssystemdateien
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor-Sicherungs- und temporäre Dateien
+*~
+*.swp
+*.swo
+*.bak
+
+# Gerenderte Modelle und Exporte
+renders/
+exports/
+
+# Lokale Test-/Render-Dateien
+ramp.scad
+rail.scad
+ramp_turn_half.scad
